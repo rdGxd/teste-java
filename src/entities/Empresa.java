@@ -7,7 +7,7 @@ public class Empresa {
     public String calcularValorTotalPago(List<Funcionario> funcionarios, int mes, int ano) {
         double total = 0;
         for (Funcionario f : funcionarios) {
-            total += f.calcularBeneficio(mes, ano) + f.calcularBeneficio(mes, ano);
+            total += f.calcularSalario(ano) + f.calcularBeneficio(mes, ano);
         }
         return "Total pago em " + mes + "/" + ano + ": " + String.format("%.2f", total);
     }
@@ -50,11 +50,9 @@ public class Empresa {
     public String calcularFuncionarioComMaisBeneficios(List<Funcionario> funcionarios, int mes, int ano) {
         Funcionario maisBeneficios = null;
         double maxBeneficios = 0;
-        String newAno = String.format("%d", ano);
-        String newSpilt = newAno.replace("20", "");
         for (Funcionario f : funcionarios) {
             if (!(f instanceof Gerente)) {
-                double beneficios = f.calcularBeneficio(mes, Integer.parseInt(newSpilt));
+                double beneficios = f.calcularBeneficio(mes, ano);
                 if (beneficios > maxBeneficios) {
                     maxBeneficios = beneficios;
                     maisBeneficios = f;
